@@ -1,0 +1,32 @@
+.app__right {
+    text-align: center;
+    height: 85vh;
+    width: 30%;
+    position: fixed;
+    right: 40px;
+    overflow: auto;
+}
+
+.order-summary {
+    overflow-y: auto;
+    height: 75%;
+}
+
+.order-summary__item {
+    display: flex;
+    flex-direction: row;
+    margin: 5px 0;
+}
+
+.order-summary__item > p {
+    margin: 0 5px;
+}
+
+.order-summary__item > p:nth-child(1),
+.order-summary__item > p:nth-child(3) {
+    width: 30%;
+}
+
+.order-summary__item > p:nth-child(2) {
+    width: 40%;
+}

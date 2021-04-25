@@ -2,6 +2,7 @@ const mime = require("mime");
 const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
+const fs = require("fs");
 
 const initialiseServer = function () {
   var server = express();
@@ -14,7 +15,6 @@ const initialiseServer = function () {
   server.use(
     cors({
       origin: function (origin, callback) {
-        console.log("origin", origin);
         if (!origin) return callback(null, true);
         if (allowedOrigins.includes(origin) === -1) {
           const msg =
@@ -28,14 +28,23 @@ const initialiseServer = function () {
 
   server.post("/api/pay", (req, res) => {
     const value = req.body;
-    console.log(value);
 
     const successObject = {
       success: true,
       message: "Successfully Paid!",
     };
 
+    // Return successful response
     res.json(successObject);
+
+    // Save to a file locally
+    var filePath = __dirname + "/data.txt";
+    fs.writeFile(filePath, JSON.stringify(value), (err) => {
+      if (err) {
+        return console.log(err);
+      }
+      console.log("File saved");
+    });
   });
 
   server.listen(8888, function () {

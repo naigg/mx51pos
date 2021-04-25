@@ -10,3 +10,7 @@
     min-width: 80px;
     cursor: pointer;
 }
+
+.button.primary {
+    background-color: rgb(47, 184, 34);
+}
