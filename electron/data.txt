@@ -1,1 +1,1 @@
-{"price":15,"items":["Cali Burger","Plain Fries"]}
+{"price":0,"items":[]}

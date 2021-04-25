@@ -25,6 +25,7 @@ const App = () => {
   // Order Summary list
   const [orderSummaryItems, setOrderSummaryItems] = useState([]);
 
+  // Effects
   useEffect(() => {
     setBurgers(burgersApi);
     setDrinks(drinksApi);
@@ -32,11 +33,15 @@ const App = () => {
     setSides(sidesApi);
   }, []);
 
+  //Handlers
   const onPayHandler = async ({ price, items }) => {
     const res = await axios.post(`${BASE_API_URL}/pay`, { price, items });
 
     const value = res.data;
-    console.log(value);
+
+    if (value.success) {
+      alert(value.message);
+    }
   };
 
   const itemHandler = (item) => {
@@ -50,10 +55,24 @@ const App = () => {
     setOrderSummaryItems([]);
   };
 
+  const removeItemHandler = (item) => {
+    const currentItems = orderSummaryItems;
+    let hasChecked = false;
+    const newItems = currentItems.filter((currItem) => {
+      const isItem = currItem.id === item.id;
+      if (!hasChecked && isItem) {
+        hasChecked = true;
+        return false;
+      }
+      return true;
+    });
+    setOrderSummaryItems(newItems);
+  };
+
   return (
     <div className="app">
       <h1 className="app__header">Cali Burgers</h1>
-      <div>
+      <div className="app__content">
         <div className="app__left">
           <FoodList title="Burgers" items={burgers} itemHandler={itemHandler} />
           <FoodList title="Fries" items={fries} itemHandler={itemHandler} />
@@ -64,6 +83,8 @@ const App = () => {
           summary={orderSummaryItems}
           submitHandler={onPayHandler}
           clearHandler={clearHandler}
+          addItemHandler={itemHandler}
+          removeItemHandler={removeItemHandler}
         />
       </div>
     </div>

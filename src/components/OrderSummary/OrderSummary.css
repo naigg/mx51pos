@@ -22,11 +22,25 @@
     margin: 0 5px;
 }
 
-.order-summary__item > p:nth-child(1),
+.order-summary__item > p:nth-child(1) {
+    width: 90px;
+}
 .order-summary__item > p:nth-child(3) {
-    width: 30%;
+    width: calc(100% - 40% - 90px);
 }
 
 .order-summary__item > p:nth-child(2) {
-    width: 40%;
+    width: calc(100% - 30% - 90px);
+}
+
+.order-summary__button {
+    outline: 0;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    margin: 0 2px;
 }

@@ -1,5 +1,14 @@
 .app {
   padding: 0 40px;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.app__content {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  margin-bottom: 25px;
 }
 
 .app__left {

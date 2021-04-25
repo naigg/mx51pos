@@ -6,7 +6,13 @@ import "./OrderSummary.css";
 // Components
 import Button from "../Button";
 
-const OrderSummary = ({ summary, submitHandler, clearHandler }) => {
+const OrderSummary = ({
+  summary,
+  submitHandler,
+  clearHandler,
+  addItemHandler,
+  removeItemHandler,
+}) => {
   const [totalPay, setTotalPay] = useState(0);
   const [filteredSummary, setFilteredSummary] = useState([]);
 
@@ -42,16 +48,42 @@ const OrderSummary = ({ summary, submitHandler, clearHandler }) => {
     submitHandler({ price: totalPay, items });
   };
 
+  const renderButtons = () => {
+    const isNotEmpty = filteredSummary.length > 0;
+    return (
+      <React.Fragment>
+        <Button btnType="primary" disabled={!isNotEmpty} onClick={payHandler}>
+          Pay
+        </Button>
+        <Button disabled={!isNotEmpty} onClick={clearHandler}>
+          Clear
+        </Button>
+      </React.Fragment>
+    );
+  };
+
   return (
     <div className="app__right">
-      <p>Order summary</p>
+      <p>
+        <strong>Order summary</strong>
+      </p>
       <ul className="order-summary">
         {filteredSummary.map((item) => (
           <li className="order-summary__item" key={`${item.id}-${item.name}`}>
             <p>
-              <button>-</button>
+              <button
+                className="order-summary__button"
+                onClick={() => removeItemHandler(item)}
+              >
+                -
+              </button>
               {item.count}
-              <button>+</button>
+              <button
+                className="order-summary__button"
+                onClick={() => addItemHandler(item)}
+              >
+                +
+              </button>
             </p>
             <p>{item.name}</p>
             <p>${item.price}</p>
@@ -59,12 +91,7 @@ const OrderSummary = ({ summary, submitHandler, clearHandler }) => {
         ))}
       </ul>
       <p>Total: ${totalPay}</p>
-      <Button btnType="primary" onClick={payHandler}>
-        Pay
-      </Button>
-      {filteredSummary.length > 0 && (
-        <Button onClick={clearHandler}>Clear</Button>
-      )}
+      {renderButtons()}
     </div>
   );
 };

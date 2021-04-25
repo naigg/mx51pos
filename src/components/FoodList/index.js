@@ -7,7 +7,7 @@ import "./FoodList.css";
 const FoodList = ({ title, items, itemHandler }) => {
   return (
     <div>
-      <p>{title}</p>
+      <p><strong>{title}</strong></p>
       <ul className="food-list">
         {items.map((item) => (
           <li key={item.id} className="food-list__item">
