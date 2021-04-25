@@ -1,5 +1,6 @@
 {
   "name": "mx51pos",
+  "productName": "mx51pos",
   "version": "0.1.0",
   "private": true,
   "homepage": "./",
@@ -12,9 +13,6 @@
     "body-parser": "^1.19.0",
     "concurrently": "^6.0.2",
     "cors": "^2.8.5",
-    "electron": "^12.0.5",
-    "electron-builder": "^22.10.5",
-    "electron-is-dev": "^2.0.0",
     "express": "^4.17.1",
     "mime": "^2.5.2",
     "prop-types": "^15.7.2",
@@ -31,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "ebuild": "npm run build && node_modules/.bin/build"
+    "electron-build": "electron-packager ."
   },
   "eslintConfig": {
     "extends": [
@@ -50,5 +48,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "electron-packager": "^15.2.0",
+    "electron": "^12.0.5",
+    "electron-builder": "^22.10.5",
+    "electron-is-dev": "^2.0.0"
   }
 }
